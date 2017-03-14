@@ -22,15 +22,16 @@ by Mathieu Bourgey, _Ph.D_
 
 ## Table of contents
 1. [Introduction](#introduction)
-2. [Calling Variants with GATK](#variants)
-3. [Investigating the SNP calls](#investigating)
-4. [Filter the variants](#filter)
-5. [Adding functional consequence](#function)
-6. [Investigating the functional consequence of variants](#consequence)
-7. [Adding dbSNP annotations](#dbSNP)
-8. [Overall script](#script)
-9. [(Optional) Investigating the trio](#trio)
-10. [Acknowledgements](#ackno)
+2. [Original Setup](#setup)
+3. [Calling Variants with GATK](#variants)
+4. [Investigating the SNP calls](#investigating)
+5. [Filter the variants](#filter)
+6. [Adding functional consequence](#function)
+7. [Investigating the functional consequence of variants](#consequence)
+8. [Adding dbSNP annotations](#dbSNP)
+9. [Overall script](#script)
+10. [(Optional) Investigating the trio](#trio)
+11. [Acknowledgements](#ackno)
 
 
 
@@ -56,7 +57,7 @@ We're going to focus on the reads extracted from a 300 kbp stretch of chromosome
 
 
 ## Original Setup
-
+<a name="setup"></a>
 
 ### Amazon node
 
@@ -143,7 +144,7 @@ java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller  -l INFO -R $REF/hg19.fa \
 -I bam/NA12878/NA12878.bwa.sort.bam  --variant_index_type LINEAR --variant_index_parameter 128000 -dt none \
 -o variants/NA12878.hc.vcf  -L chr1:17704860-18004860
 
-#A12878.sort.rmdup.realign
+#NA12878.sort.rmdup.realign
 java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller -l INFO -R $REF/hg19.fa \
 -I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam  --variant_index_type LINEAR --variant_index_parameter 128000 -dt none \
 -o variants/NA12878.rmdup.realign.hc.vcf -L chr1:17704860-18004860
@@ -157,7 +158,7 @@ java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller -l INFO -R $REF/hg19.fa \
  
 `-I` specifies the input BAM files. 
 
-`--variant_index_type` LINEAR  specifies the indexing strategy to use for VCFs. LINEAR creates a LinearIndex with bins of equal width, specified by the Bin Width parameterthe type of IndexCreator to use for for VCF/BCF indices. 
+`--variant_index_type` LINEAR  specifies the indexing strategy to use for VCFs. LINEAR creates a Linear index with bins of equal width, specified by the Bin Width parameter. 
 
 `--variant_index_parameter` 128000 specifies the bin width.
 
