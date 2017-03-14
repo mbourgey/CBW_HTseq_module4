@@ -177,7 +177,7 @@ less -S variants/NA12878.rmdup.realign.hc.vcf
 ```
 
 
-Vcf is a daunting format at first glance, but you can find some basic information about the format [here](http://www.1000genomes.org/wiki/Analysis/vcf4.0) or [here](http://bioinformatics.ca/workshop_wiki/images/f/ff/VcfInfoFields_2013.pdf).
+Vcf is a daunting format at first glance, but you can find some basic information about the format [here](http://www.1000genomes.org/wiki/Analysis/vcf4.0).
 
 Fields vary from caller to caller. Some values are more constant.
 The ref vs alt alleles, variant quality (QUAL column) and the per-sample genotype (GT) values are almost always there.
@@ -215,7 +215,7 @@ diff <(grep ^chr variants/NA12878.hc.vcf | cut -f1-2 | sort) \
 
 The best way to see and understand the differences between the two vcf files will be to look at them in IGV.
 
-If you need, the IGV color codes can be found here: [IGV color code](https://www.broadinstitute.org/igv/interpreting_insert_size)
+If you need, the IGV color codes can be found here: [IGV color code by insert size](http://software.broadinstitute.org/software/igv/interpreting_insert_size) and [IGV color code by pair orientation](http://software.broadinstitute.org/software/igv/interpreting_pair_orientations).
 
 ----
 **Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file from your Cloud instance. We have a web server running on the Amazon cloud for each instance.
