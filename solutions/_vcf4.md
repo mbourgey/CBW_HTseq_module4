@@ -5,8 +5,8 @@ grep -v "^#" variants/NA12878.rmdup.realign.hc.vcf | wc -l
 grep -v "^#" variants/NA12878.hc.vcf | wc -l 
 ```
 
-We have 404 in the realigned vcf and 405 in the not raw vcf
+We have 404 variants in the realigned vcf and 405 in the raw vcf
 
-In that case the impact of recalibration is very low as HaplotypeCaller perform a similar step internally
+In that case the impact of recalibration is very low because HaplotypeCaller perform a similar step internally
 
 

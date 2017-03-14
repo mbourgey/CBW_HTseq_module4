@@ -1,7 +1,7 @@
 Genotypes are given per individuals in the 10+ columns.
 
 
-Based on the FORMAT description the genotype (GT) is the first information provided (separated by `:`). 
+Based on the FORMAT description, the genotype (GT) is the first information provided (separated by `:`). 
 
 
 3 different values are available:

@@ -1,4 +1,4 @@
-The largest indels can be computed by extending the previous command while printing the size of the indel:
+Largest indels size can be computed by extending the previous command while printing the size of the indel:
 
 ```
 grep -v "^#" variants/NA12878.rmdup.realign.hc.vcf | \

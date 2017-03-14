@@ -309,7 +309,7 @@ The next step in trying to make sense of the variant calls is to assign function
 
 At the most basic level, this involves using gene annotations to determine if variants are sense, missense, or nonsense. 
 
-We typically use snpEff but many use annovar and VEP as well.
+We typically use SnpEff but many use Annovar and VEP as well.
 
 Let's run snpEff
 ```
@@ -347,7 +347,7 @@ Use less to look at the new vcf file:
 less -S variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf
 ```
 
-We can see in the vcf that snpEff added a few sections. These are hard to decipher directly from the VCF other tools or scripts, need to be used to make sens of this.
+We can see in the vcf that snpEff added few sections. These are hard to decipher directly from the VCF other tools or scripts, need to be used to make sens of this.
 
 
 The annotation is presented in the INFO field using the new ANN format. For more information on this field see [here](http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf). Typically, we have: 
@@ -373,7 +373,7 @@ Next, open the file in any web browser.
 
 ### Finding impactful variants
 
-One nice feature in snpEff is that it tries to assess the impact of each variant. You can read more about the effect categories[here](http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf).
+One nice feature in snpEff is that it tries to assess the impact of each variant. You can read more about the effect categories [here](http://snpeff.sourceforge.net/VCFannotationformat_v1.0.pdf).
 
 
 **How many variants had a high impact?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_snpEff2.md)
