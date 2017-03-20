@@ -14,7 +14,7 @@ home: https://bioinformaticsdotca.github.io/high-throughput_biology_2017
 
 -----------------------
 
-# CBW HT-seq Module 4 - Single Nuclite Variant Calling   
+# CBW HT-seq Module 4 - Single Nucleotide Variant Calling   
 
  
 by Mathieu Bourgey, _Ph.D_
@@ -44,16 +44,16 @@ The goal of this practical session is to identify single nucleotide variants (SN
 
 NA12878 is the child of the trio while NA12891 and NA12892 are her parents.
 
-![Pedigree](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/img/Pedigree.png) 
+![Pedigree](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/img/Pedigree.png?raw=true) 
 
 
 For practical reasons we subsampled the reads from the sample because running the whole dataset would take way too much time and resources.
 We're going to focus on the reads extracted from a 300 kbp stretch of chromosome 1
 
 
-|Chromosome|Start|End|
-|---|---|---|
-|chr1|17704860|18004860|
+| Chromosome | Start | End |
+| --- | --- | --- |
+| chr1 | 17704860 | 18004860 |
 
 
 
@@ -62,7 +62,7 @@ We're going to focus on the reads extracted from a 300 kbp stretch of chromosome
 
 ### Amazon node
 
-Read these [directions](http://bioinformatics-ca.github.io/logging_into_the_Amazon_cloud/) for information on how to log in to your assigned Amazon node. 
+Read these [directions](http://bioinformaticsdotca.github.io/AWS_setup) for information on how to log in to your assigned Amazon node. 
 
 ### Software requirements
 These are all already installed, but here are the original links.
