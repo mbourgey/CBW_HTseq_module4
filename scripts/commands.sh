@@ -1,9 +1,9 @@
 
 export SOFT_DIR=/usr/local/
 export WORK_DIR=~/workspace/HTseq/Module4/
+export GATK_JAR=$SOFT_DIR/gatk-4.0.1.2/gatk-package-4.0.1.2-local.jar
 export SNPEFF_JAR=$SOFT_DIR/snpEff/snpEff.jar
-export GATK_JAR=$SOFT_DIR/GATK/GenomeAnalysisTK.jar
-export BVATOOLS_JAR=$SOFT_DIR/bvatools/bvatools-1.6-full.jar
+export GATK_OLD_JAR=~/CourseData/HT_data/software/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar
 export REF=$WORK_DIR/reference/
 
 
@@ -17,14 +17,18 @@ ls bam/NA12878/
 
 
 #NA12878.sort
-java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller  -l INFO -R $REF/hg19.fa \
--I bam/NA12878/NA12878.bwa.sort.bam  --variant_index_type LINEAR --variant_index_parameter 128000 -dt none \
--o variants/NA12878.hc.vcf  -L chr1:17704860-18004860
+java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
+-R $REF/hg19.fa \
+-I bam/NA12878/NA12878.bwa.sort.bam \
+-O variants/NA12878.hc.vcf \
+-L chr1:17704860-18004860
 
-#A12878.sort.rmdup.realign
-java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller -l INFO -R $REF/hg19.fa \
--I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam  --variant_index_type LINEAR --variant_index_parameter 128000 -dt none \
--o variants/NA12878.rmdup.realign.hc.vcf -L chr1:17704860-18004860
+#NA12878.sort.rmdup.realign
+java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
+-R $REF/hg19.fa \
+-I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam \
+-O variants/NA12878.rmdup.realign.hc.vcf \
+-L chr1:17704860-18004860
 
 #less -S variants/NA12878.rmdup.realign.hc.vcf
 
@@ -35,13 +39,16 @@ diff <(grep ^chr variants/NA12878.hc.vcf | cut -f1-2 | sort) \
 #| awk '{ if(length($4) != length($5)) { print $0 } }' \
 #| less -S
 
-java -Xmx2g -jar $GATK_JAR -T VariantFiltration \
--R $REF/hg19.fa --variant variants/NA12878.rmdup.realign.hc.vcf -o variants/NA12878.rmdup.realign.hc.filter.vcf --filterExpression "QD < 2.0" \
---filterExpression "FS > 200.0" \
---filterExpression "MQ < 40.0" \
---filterName QDFilter \
---filterName FSFilter \
---filterName MQFilter
+java -Xmx2g -jar $GATK_JAR VariantFiltration \
+-R $REF/hg19.fa \
+-V variants/NA12878.rmdup.realign.hc.vcf \
+-O variants/NA12878.rmdup.realign.hc.filter.vcf \
+-filter "QD < 2.0" \
+-filter "FS > 200.0" \
+-filter "MQ < 40.0" \
+--filter-name QDFilter \
+--filter-name FSFilter \
+--filter-name MQFilter
 
 java -Xmx2G -jar $SNPEFF_JAR eff \
 -c $REF/snpEff_hg19.config -v -no-intergenic \
@@ -51,6 +58,9 @@ java -Xmx2G -jar $SNPEFF_JAR eff \
 
 #less -S variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf
 
-java -Xmx2g -jar $GATK_JAR -T VariantAnnotator -R $REF/hg19.fa \
---dbsnp $REF/dbSNP_135_chr1.vcf.gz --variant variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
--o variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf -L chr1:17704860-18004860
+java -Xmx2g -jar $GATK_OLD_JAR -T VariantAnnotator \
+-R $REF/hg19.fa \
+--dbsnp $REF/dbSNP_135_chr1.vcf.gz \
+-V variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
+-o variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf \
+-L chr1:17704860-18004860
