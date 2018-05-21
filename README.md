@@ -1,6 +1,6 @@
 ---
 layout: tutorial_page
-permalink: /htseq_2017_module4_lab
+permalink: /htseq_2018_module4_lab
 title: HTSeq Lab 4
 header1: Workshop Pages for Students
 header2: Informatics on High-Throughput Sequencing Data Module 4 Lab
@@ -70,7 +70,6 @@ These are all already installed, but here are the original links.
   * [SAMTools](http://sourceforge.net/projects/samtools/)
   * [IGV](http://www.broadinstitute.org/software/igv/download)
   * [Genome Analysis Toolkit](http://www.broadinstitute.org/gatk/)
-  * [Picard](http://picard.sourceforge.net/)
   * [SnpEff](http://snpeff.sourceforge.net/)
 
 In this session, we will particularly focus on GATK HaplotypeCaller SNV detection tool. The main advantage of HaplotypeCaller is to do the calling using a local de-novo assembly approach. When the program encounters a region showing signs of variation, it discards the existing mapping information and completely reassembles the reads in that region. This allow a better accuracy in regions that are traditionally difficult to call, for example when they contain different types of variants close to each other.
