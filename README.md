@@ -217,7 +217,7 @@ If you need, the IGV color codes can be found here: [IGV color code by insert si
 ----
 **Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file from your Cloud instance. We have a web server running on the Amazon cloud for each instance.
 
-In a browser, like Firefox, type in your server name (cbw#.dyndns.info) and all files under your workspace will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
+In a browser, like Firefox, type in your server name (##.oicrcbw.ca) and all files under your workspace will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
 
 Next, open IGV and select hg19 as the reference genome as you did in the visualization module.
 
