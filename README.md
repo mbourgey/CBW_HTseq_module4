@@ -1,11 +1,11 @@
 ---
 layout: tutorial_page
-permalink: /htseq_2017_module4_lab
+permalink: /htseq_2018_module4_lab
 title: HTSeq Lab 4
 header1: Workshop Pages for Students
 header2: Informatics on High-Throughput Sequencing Data Module 4 Lab
 image: /site_images/CBW_High-throughput_icon.jpg
-home: https://bioinformaticsdotca.github.io/htseq_2017
+home: https://bioinformaticsdotca.github.io/htseq_2018
 ---
 
 -----------------------
@@ -70,7 +70,6 @@ These are all already installed, but here are the original links.
   * [SAMTools](http://sourceforge.net/projects/samtools/)
   * [IGV](http://www.broadinstitute.org/software/igv/download)
   * [Genome Analysis Toolkit](http://www.broadinstitute.org/gatk/)
-  * [Picard](http://picard.sourceforge.net/)
   * [SnpEff](http://snpeff.sourceforge.net/)
 
 In this session, we will particularly focus on GATK HaplotypeCaller SNV detection tool. The main advantage of HaplotypeCaller is to do the calling using a local de-novo assembly approach. When the program encounters a region showing signs of variation, it discards the existing mapping information and completely reassembles the reads in that region. This allow a better accuracy in regions that are traditionally difficult to call, for example when they contain different types of variants close to each other.
@@ -80,9 +79,9 @@ In this session, we will particularly focus on GATK HaplotypeCaller SNV detectio
 ```
 export SOFT_DIR=/usr/local/
 export WORK_DIR=~/workspace/HTseq/Module4/
+export GATK_JAR=$SOFT_DIR/gatk-4.0.1.2/gatk-package-4.0.1.2-local.jar
 export SNPEFF_JAR=$SOFT_DIR/snpEff/snpEff.jar
-export GATK_JAR=$SOFT_DIR/GATK/GenomeAnalysisTK.jar
-export BVATOOLS_JAR=$SOFT_DIR/bvatools/bvatools-1.6-full.jar
+export GATK_OLD_JAR=~/CourseData/HT_data/software/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar
 export REF=$WORK_DIR/reference/
 
 
@@ -141,29 +140,26 @@ Let's call SNPs in NA12878 using both the original and the improved bam files:
 
 ```
 #NA12878.sort
-java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller  -l INFO -R $REF/hg19.fa \
--I bam/NA12878/NA12878.bwa.sort.bam  --variant_index_type LINEAR --variant_index_parameter 128000 -dt none \
--o variants/NA12878.hc.vcf  -L chr1:17704860-18004860
+java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
+-R $REF/hg19.fa \
+-I bam/NA12878/NA12878.bwa.sort.bam \
+-O variants/NA12878.hc.vcf \
+-L chr1:17704860-18004860
 
 #NA12878.sort.rmdup.realign
-java -Xmx2g -jar $GATK_JAR -T HaplotypeCaller -l INFO -R $REF/hg19.fa \
--I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam  --variant_index_type LINEAR --variant_index_parameter 128000 -dt none \
--o variants/NA12878.rmdup.realign.hc.vcf -L chr1:17704860-18004860
+java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
+-R $REF/hg19.fa \
+-I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam \
+-O variants/NA12878.rmdup.realign.hc.vcf \
+-L chr1:17704860-18004860
 ```
 
 `-Xmx2g` instructs java to allow up 2 GB of RAM to be used for GATK.
  
-`-l` INFO specifies the minimum level of logging. 
  
 `-R` specifies which reference sequence to use. 
  
 `-I` specifies the input BAM files. 
-
-`--variant_index_type` LINEAR  specifies the indexing strategy to use for VCFs. LINEAR creates a Linear index with bins of equal width, specified by the Bin Width parameter. 
-
-`--variant_index_parameter` 128000 specifies the bin width.
-
-`-dt` NONE specifies to do not downsample the data.
 
 `-L` indicates the reference region where SNP calling should take place 
 
@@ -221,7 +217,7 @@ If you need, the IGV color codes can be found here: [IGV color code by insert si
 ----
 **Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file from your Cloud instance. We have a web server running on the Amazon cloud for each instance.
 
-In a browser, like Firefox, type in your server name (cbw#.dyndns.info) and all files under your workspace will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
+In a browser, like Firefox, type in your server name (##.oicrcbw.ca) and all files under your workspace will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
 
 Next, open IGV and select hg19 as the reference genome as you did in the visualization module.
 
@@ -277,13 +273,16 @@ To perform more rigorous filtering, another program must be used. In our case, w
 **NOTE:** The best practice when using GATK is to use the *VariantRecalibrator*. In our data set, we had too few variants to accurately use the variant recalibrator and therefore we used the *VariantFiltration* tool instead. 
 
 ```
-java -Xmx2g -jar $GATK_JAR -T VariantFiltration \
--R $REF/hg19.fa --variant variants/NA12878.rmdup.realign.hc.vcf -o variants/NA12878.rmdup.realign.hc.filter.vcf --filterExpression "QD < 2.0" \
---filterExpression "FS > 200.0" \
---filterExpression "MQ < 40.0" \
---filterName QDFilter \
---filterName FSFilter \
---filterName MQFilter
+java -Xmx2g -jar $GATK_JAR VariantFiltration \
+-R $REF/hg19.fa \
+-V variants/NA12878.rmdup.realign.hc.vcf \
+-O variants/NA12878.rmdup.realign.hc.filter.vcf \
+-filter "QD < 2.0" \
+-filter "FS > 200.0" \
+-filter "MQ < 40.0" \
+--filter-name QDFilter \
+--filter-name FSFilter \
+--filter-name MQFilter
 ```
 
 
@@ -291,13 +290,13 @@ java -Xmx2g -jar $GATK_JAR -T VariantFiltration \
 
 `-R` specifies which reference sequence to use. 
 
-`--variant` specifies the input vcf file. 
+`-V` specifies the input vcf file. 
 
-`-o` specifies the output vcf file. 
+`-O` specifies the output vcf file. 
 
-`--filterExpression` defines an expression using the vcf INFO and genotype variables. 
+`-filter` defines an expression using the vcf INFO and genotype variables. 
 
-`--filterName` defines what the filter field should display if that filter is true. 
+`--filter-name` defines what the filter field should display if that filter is true. 
 
 **What is QD, FS, and MQ?**  [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_filter1.md)
 
@@ -405,9 +404,12 @@ The third column in the vcf file is reserved for identifiers. Perhaps the most c
 Use the following command to generate dbSNP rsIDs for our vcf file: 
 
 ```
-java -Xmx2g -jar $GATK_JAR -T VariantAnnotator -R $REF/hg19.fa \
---dbsnp $REF/dbSNP_135_chr1.vcf.gz --variant variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
--o variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf -L chr1:17704860-18004860
+java -Xmx2g -jar $GATK_OLD_JAR -T VariantAnnotator \
+-R $REF/hg19.fa \
+--dbsnp $REF/dbSNP_135_chr1.vcf.gz \
+-V variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
+-o variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf \
+-L chr1:17704860-18004860
 ```
 
 
@@ -417,7 +419,7 @@ java -Xmx2g -jar $GATK_JAR -T VariantAnnotator -R $REF/hg19.fa \
 
 `--dbsnp` specifies the input dbSNP vcf file. This is used as the source for the annotations. 
 
-`--variant` specifies the input vcf file. 
+`-V` specifies the input vcf file. 
 
 `-o` specifies the output vcf file. 
 
