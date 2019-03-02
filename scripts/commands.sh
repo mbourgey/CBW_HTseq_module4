@@ -1,5 +1,4 @@
 
-export SOFT_DIR=/usr/local/
 export WORK_DIR=~/workspace/HTseq/Module4/
 export REF=$WORK_DIR/reference/
 
@@ -9,7 +8,7 @@ mkdir -p $WORK_DIR/variants
 cd $WORK_DIR
 ln -s ~/CourseData/HT_data/Module4/* .
 
-singularity run -B ~/cvmfs_cache:/cvmfs-cache/ docker://c3genomics/genpipes:0.4
+singularity run -B ~/cvmfs_cache:/cvmfs-cache/ docker://c3genomics/genpipes:0.7  -V 3.1.2
 module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
 
 
@@ -62,7 +61,7 @@ java -Xmx2G -jar $SNPEFF_HOME/snpEff.jar eff \
 module unload  mugqic/GenomeAnalysisTK/4.1.0.0
 module load mugqic/GenomeAnalysisTK/3.8
 
-java -Xmx2g -jar $GATK_OLD_JAR -T VariantAnnotator \
+java -Xmx2g -jar $GATK_JAR -T VariantAnnotator \
 -R $REF/hg19.fa \
 --dbsnp $REF/dbSNP_135_chr1.vcf.gz \
 -V variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
@@ -72,3 +71,7 @@ java -Xmx2g -jar $GATK_OLD_JAR -T VariantAnnotator \
 #return to GATK 4
 module unload mugqic/GenomeAnalysisTK/3.8
 module load  mugqic/GenomeAnalysisTK/4.1.0.0
+
+
+
+exit

@@ -77,11 +77,7 @@ In this session, we will particularly focus on GATK HaplotypeCaller SNV detectio
 ### Environment setup
 
 ```
-export SOFT_DIR=/usr/local/
 export WORK_DIR=~/workspace/HTseq/Module4/
-export GATK_JAR=$SOFT_DIR/gatk-4.0.1.2/gatk-package-4.0.1.2-local.jar
-export SNPEFF_JAR=$SOFT_DIR/snpEff/snpEff.jar
-export GATK_OLD_JAR=~/CourseData/HT_data/software/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar
 export REF=$WORK_DIR/reference/
 
 
@@ -89,6 +85,9 @@ rm -rf $WORK_DIR
 mkdir -p $WORK_DIR/variants
 cd $WORK_DIR
 ln -s ~/CourseData/HT_data/Module4/* .
+
+singularity run -B ~/cvmfs_cache:/cvmfs-cache/ docker://c3genomics/genpipes:0.7  -V 3.1.2
+module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
 ```
 
 ### Data files
@@ -313,7 +312,7 @@ We typically use SnpEff but many use Annovar and VEP as well.
 
 Let's run snpEff
 ```
-java -Xmx2G -jar $SNPEFF_JAR eff \
+java -Xmx2G -jar $SNPEFF_HOME/snpEff.jar eff \
 -c $REF/snpEff_hg19.config -v -no-intergenic \
 -i vcf -o vcf hg19 variants/NA12878.rmdup.realign.hc.filter.vcf >  variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf
 ```
@@ -404,12 +403,21 @@ The third column in the vcf file is reserved for identifiers. Perhaps the most c
 Use the following command to generate dbSNP rsIDs for our vcf file: 
 
 ```
-java -Xmx2g -jar $GATK_OLD_JAR -T VariantAnnotator \
+
+#switch to old GATK 3.8
+module unload  mugqic/GenomeAnalysisTK/4.1.0.0
+module load mugqic/GenomeAnalysisTK/3.8
+
+java -Xmx2g -jar $GATK_JAR -T VariantAnnotator \
 -R $REF/hg19.fa \
 --dbsnp $REF/dbSNP_135_chr1.vcf.gz \
 -V variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
 -o variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf \
 -L chr1:17704860-18004860
+
+#return to GATK 4
+module unload mugqic/GenomeAnalysisTK/3.8
+module load  mugqic/GenomeAnalysisTK/4.1.0.0
 ```
 
 
@@ -445,6 +453,14 @@ As additional practice, perform the same steps for the other two individuals (he
  3. **Do all three family members have the same genotype for Rs7538876 and Rs2254135?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_trio3.md)
 
  4. GATK produces even better variant calling results if all three BAM files are specified at the same time (i.e. specifying multiple `-I filename` options). Try this and then perform the rest of module 5 on the trio vcf file. **Does this seem to improve your variant calling results? Does it seem to reduce the trio conflict rate?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_trio4.md)
+ 
+ 
+
+### quit the singularity container Environment
+
+```
+exit
+```
 
 ## Acknowledgements
 <a name="ackno"></a>
