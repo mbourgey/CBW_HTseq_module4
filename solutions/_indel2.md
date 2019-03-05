@@ -9,7 +9,7 @@ sort -k1,1nr | head
 The indel sizes are computed as the absolute value of the difference in charater size between the 2 alleles.
 
 
-The largest ones are 15bp long `chr1 17798774` and `chr1 1781728`. 
+The largest ones are 15bp long `chr1 17798774` and `chr1 17817280`. 
 
 
 
