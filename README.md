@@ -78,16 +78,24 @@ In this session, we will particularly focus on GATK HaplotypeCaller SNV detectio
 
 ```
 export WORK_DIR=~/workspace/HTseq/Module4/
-export REF=$WORK_DIR/reference/
-
 
 rm -rf $WORK_DIR
 mkdir -p $WORK_DIR/variants
 cd $WORK_DIR
-ln -s ~/CourseData/HT_data/Module4/* .
+ln -s ../../../HT_data_2018/Module4/* .
 
-singularity run -B ~/cvmfs_cache:/cvmfs-cache/ docker://c3genomics/genpipes:0.7  -V 3.1.2
-module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
+docker run \
+ --privileged \
+ -v /tmp:/tmp \
+ --network host \
+ -it \
+ -w $PWD \
+ -v $HOME:$HOME \
+ -v /media:/media
+ --user $UID:$GROUPS \
+ -v /etc/group:/etc/group \
+ -v /etc/passwd:/etc/passwd \
+ c3genomics/genpipes:0.8
 ```
 
 ### Data files
