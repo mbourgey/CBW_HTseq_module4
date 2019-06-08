@@ -142,14 +142,14 @@ Let's call SNPs in NA12878 using both the original and the improved bam files:
 ```
 #NA12878.sort
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
--R $REF/hg19.fa \
+-R reference/hg19.fa \
 -I bam/NA12878/NA12878.bwa.sort.bam \
 -O variants/NA12878.hc.vcf \
 -L chr1:17704860-18004860
 
 #NA12878.sort.rmdup.realign
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
--R $REF/hg19.fa \
+-R reference/hg19.fa \
 -I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam \
 -O variants/NA12878.rmdup.realign.hc.vcf \
 -L chr1:17704860-18004860
