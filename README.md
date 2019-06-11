@@ -275,7 +275,7 @@ To perform more rigorous filtering, another program must be used. In our case, w
 
 ```
 java -Xmx2g -jar $GATK_JAR VariantFiltration \
--R $REF/hg19.fa \
+-R reference/hg19.fa \
 -V variants/NA12878.rmdup.realign.hc.vcf \
 -O variants/NA12878.rmdup.realign.hc.filter.vcf \
 -filter "QD < 2.0" \
