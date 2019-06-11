@@ -458,7 +458,7 @@ As additional practice, perform the same steps for the other two individuals (he
  
  
 
-### quit the singularity container Environment
+### quit the docker container Environment
 
 ```
 exit
