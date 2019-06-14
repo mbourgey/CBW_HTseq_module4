@@ -77,12 +77,9 @@ In this session, we will particularly focus on GATK HaplotypeCaller SNV detectio
 ### Environment setup
 
 ```
-export WORK_DIR=~/workspace/HTseq/Module4/
+export WORK_DIR_M4=$HOME/workspace/HTseq/Module4/
+export REF=$HOME/workspace/HTseq/Module4/reference
 
-rm -rf $WORK_DIR
-mkdir -p $WORK_DIR/variants
-cd $WORK_DIR
-ln -s ../../../HT_data_2018/Module4/* .
 
 docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME -v /media:/media --user $UID:$GROUPS -v /etc/group:/etc/group -v /etc/passwd:/etc/passwd c3genomics/genpipes:0.8
 
