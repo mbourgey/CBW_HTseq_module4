@@ -251,7 +251,7 @@ Finally, go to a region on chromsome 1 with reads (chr1:17704860-18004860) and s
 
 INDELs can be found by looking for rows where the reference base column and the alternate base column are different lengths. It's slightly more complicated than that since, you'll also pick up the comma delimited alternate bases.
 
-Here's an awk expression that almost picks out the INDELs: 
+Here's an awk expression that picks out the INDELs: 
 
 ```
 grep -v "^#" variants/NA12878.rmdup.realign.hc.vcf \
