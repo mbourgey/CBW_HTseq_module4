@@ -142,6 +142,8 @@ If you recall from the previous module, we first mapped the reads to hg19 and th
 Let's call SNPs in NA12878 using both the original and the improved bam files:
 
 ```
+
+mkdir -p variants
 #NA12878.sort
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
 -R $REF/hg19.fa \
