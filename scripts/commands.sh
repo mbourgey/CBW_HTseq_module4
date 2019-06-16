@@ -17,7 +17,7 @@ module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/bvatools/1.6 mugqic/trimmomat
 
 ls bam/NA12878/
 
-
+mkdir -p variants
 #NA12878.sort
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
 -R $REF/hg19.fa \
