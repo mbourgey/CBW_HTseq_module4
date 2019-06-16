@@ -74,7 +74,3 @@ java -Xmx2g -jar $GATK_JAR -T VariantAnnotator \
 #return to GATK 4
 module unload mugqic/GenomeAnalysisTK/3.8
 module load  mugqic/GenomeAnalysisTK/4.1.0.0
-
-
-
-exit
