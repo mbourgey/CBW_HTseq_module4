@@ -1,12 +1,20 @@
 
-export SOFT_DIR=/usr/local/
-export WORK_DIR=~/workspace/HTseq/Module4/
-export GATK_JAR=$SOFT_DIR/gatk-4.0.1.2/gatk-package-4.0.1.2-local.jar
-export SNPEFF_JAR=$SOFT_DIR/snpEff/snpEff.jar
-export GATK_OLD_JAR=~/CourseData/HT_data/software/GenomeAnalysisTK-3.8/GenomeAnalysisTK.jar
-export REF=$WORK_DIR/reference/
+docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME -v /media:/media --user $UID:$GROUPS -v /etc/group:/etc/group -v /etc/passwd:/etc/passwd c3genomics/genpipes:0.8
 
-cd $WORK_DIR
+
+export WORK_DIR_M4=$HOME/workspace/HTseq/Module4/
+export REF=$HOME/workspace/HTseq/Module4/reference
+mkdir -p $WORK_DIR_M4
+cd $WORK_DIR_M4
+ln -s $HOME/CourseData/HT_data/Module4/* .
+
+module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/bvatools/1.6 mugqic/trimmomatic/0.36 mugqic/samtools/1.9 mugqic/bwa/0.7.17 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/R_Bioconductor/3.5.0_3.7 mugqic/snpEff/4.3
+
+
+
+ls bam/NA12878/
+
+mkdir -p variants
 
 #parent 1
 
