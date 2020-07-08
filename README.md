@@ -464,7 +464,7 @@ As additional practice, perform the same steps for the other two individuals (he
  
  
 
-### quit the docker container Environment
+### quit the working node Environment
 
 ```
 exit
