@@ -214,9 +214,9 @@ The best way to see and understand the differences between the two vcf files wil
 If you need, the IGV color codes can be found here: [IGV color code by insert size](http://software.broadinstitute.org/software/igv/interpreting_insert_size) and [IGV color code by pair orientation](http://software.broadinstitute.org/software/igv/interpreting_pair_orientations).
 
 ----
-**Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file from your Cloud instance. We have a web server running on the Amazon cloud for each instance.
+**Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file from the precomputated ftp server `https://datahub-39-cm2.p.genap.ca/HTseq/`.
 
-In a browser, like Firefox, type in your server name (##.oicrcbw.ca) and all files under your workspace will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
+In a browser, like Firefox, type in the server name and all files will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
 
 Next, open IGV and select hg19 as the reference genome as you did in the visualization module.
 
@@ -228,9 +228,17 @@ After you have loaded the two bam files, load the two vcf files (NA12878.hc.vcf 
 **Option 2:** Alternatively, you can download all the NA12878.* files in the current directory to your local computer:
 
 
-To do this you can use the procedure that was described previously.
+To do this you can use the procedure that was described previously. Open another terminal and launch the following command to copy your data into your local computer  
 
-After that you need to follow the steps as in Option 1 except that you need to load the files in IGV using (File->Load from File...).
+```
+scp -r userXX@CBW.calculquebec.cloud:workspace/HTseq/Module4/bam . 
+scp -r userXX@CBW.calculquebec.cloud:workspace/HTseq/Module4/variants  .
+```
+
+where `XX` is the id of your account. You may enter your password. Once the copy is done, open IGV and load the file from folders bam and variants.
+
+
+
 
 -----
 
