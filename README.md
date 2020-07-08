@@ -1,11 +1,11 @@
 ---
 layout: tutorial_page
-permalink: /htseq_2019_module4_lab
+permalink: /htseq_2020_module4_lab
 title: HTSeq Lab 4
 header1: Workshop Pages for Students
 header2: Informatics on High-Throughput Sequencing Data Module 4 Lab
 image: /site_images/CBW_High-throughput_icon.jpg
-home: https://bioinformaticsdotca.github.io/htseq_2018
+home: https://bioinformaticsdotca.github.io/htseq_2020
 ---
 
 -----------------------
@@ -60,9 +60,6 @@ We're going to focus on the reads extracted from a 300 kbp stretch of chromosome
 ## Original Setup
 <a name="setup"></a>
 
-### Amazon node
-
-Read these [directions](http://bioinformaticsdotca.github.io/AWS_setup) for information on how to log in to your assigned Amazon node. 
 
 ### Software requirements
 These are all already installed, but here are the original links.
@@ -86,7 +83,8 @@ mkdir -p $WORK_DIR/variants
 cd $WORK_DIR
 ln -s ~/CourseData/HT_data/Module4/* .
 
-singularity run -B ~/cvmfs_cache:/cvmfs-cache/ docker://c3genomics/genpipes:0.7  -V 3.1.2
+salloc --mem 0 -n 8
+
 module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
 ```
 

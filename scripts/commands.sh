@@ -8,7 +8,10 @@ mkdir -p $WORK_DIR/variants
 cd $WORK_DIR
 ln -s ~/CourseData/HT_data/Module4/* .
 
-singularity run -B ~/cvmfs_cache:/cvmfs-cache/ docker://c3genomics/genpipes:0.7  -V 3.1.2
+
+# access working node
+salloc --mem 0 -n 8
+
 module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
 
 
