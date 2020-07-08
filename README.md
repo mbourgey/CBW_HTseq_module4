@@ -17,7 +17,7 @@ home: https://bioinformaticsdotca.github.io/htseq_2020
 # CBW HT-seq Module 4 - Single Nucleotide Variant Calling   
 
  
-Created by Mathieu Bourgey, _Ph.D_, then modified by Pascale Marquis
+Created by Mathieu Bourgey, _Ph.D
 
 
 
