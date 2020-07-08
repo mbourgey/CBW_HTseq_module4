@@ -12,9 +12,8 @@ mkdir -p $WORK_DIR_M4
 cd $WORK_DIR_M4
 ln -s $HOME/CourseData/HT_data/Module4/* .
 
-module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/bvatools/1.6 mugqic/trimmomatic/0.36 mugqic/samtools/1.9 mugqic/bwa/0.7.17 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/R_Bioconductor/3.5.0_3.7 mugqic/snpEff/4.3
 
-
+module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
 
 ls bam/NA12878/
 
