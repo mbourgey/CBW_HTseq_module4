@@ -5,7 +5,11 @@ title: HTSeq Lab 4
 header1: Workshop Pages for Students
 header2: Informatics on High-Throughput Sequencing Data Module 4 Lab
 image: /site_images/CBW_High-throughput_icon.jpg
+<<<<<<< HEAD
 home: https://bioinformaticsdotca.github.io/htseq_2020
+=======
+home: https://bioinformaticsdotca.github.io/htseq_2019
+>>>>>>> 36dfbe6c18480687c81024ca125a033adbf28859
 ---
 
 -----------------------
@@ -17,7 +21,7 @@ home: https://bioinformaticsdotca.github.io/htseq_2020
 # CBW HT-seq Module 4 - Single Nucleotide Variant Calling   
 
  
-by Mathieu Bourgey, _Ph.D_
+Created by Mathieu Bourgey, _Ph.D_, then modified by Pascale Marquis
 
 
 
@@ -73,20 +77,29 @@ In this session, we will particularly focus on GATK HaplotypeCaller SNV detectio
 
 ### Environment setup
 
+
 ```
-export WORK_DIR=~/workspace/HTseq/Module4/
-export REF=$WORK_DIR/reference/
+docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME -v /media:/media --user $UID:$GROUPS -v /etc/group:/etc/group -v /etc/passwd:/etc/passwd c3genomics/genpipes:0.8
 
 
-rm -rf $WORK_DIR
-mkdir -p $WORK_DIR/variants
-cd $WORK_DIR
-ln -s ~/CourseData/HT_data/Module4/* .
+export WORK_DIR_M4=$HOME/workspace/HTseq/Module4/
+export REF=$HOME/workspace/HTseq/Module4/reference
+mkdir -p $WORK_DIR_M4
+cd $WORK_DIR_M4
+ln -s $HOME/CourseData/HT_data/Module4/* .
 
+module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/bvatools/1.6 mugqic/trimmomatic/0.36 mugqic/samtools/1.9 mugqic/bwa/0.7.17 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/R_Bioconductor/3.5.0_3.7 mugqic/snpEff/4.3
+
+
+<<<<<<< HEAD
 salloc --mem 0 -n 8
 
 module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
+=======
+>>>>>>> 36dfbe6c18480687c81024ca125a033adbf28859
 ```
+
+
 
 ### Data files
 
@@ -136,6 +149,8 @@ If you recall from the previous module, we first mapped the reads to hg19 and th
 Let's call SNPs in NA12878 using both the original and the improved bam files:
 
 ```
+
+mkdir -p variants
 #NA12878.sort
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
 -R $REF/hg19.fa \
@@ -271,7 +286,7 @@ To perform more rigorous filtering, another program must be used. In our case, w
 
 ```
 java -Xmx2g -jar $GATK_JAR VariantFiltration \
--R $REF/hg19.fa \
+-R reference/hg19.fa \
 -V variants/NA12878.rmdup.realign.hc.vcf \
 -O variants/NA12878.rmdup.realign.hc.filter.vcf \
 -filter "QD < 2.0" \
@@ -454,7 +469,7 @@ As additional practice, perform the same steps for the other two individuals (he
  
  
 
-### quit the singularity container Environment
+### quit the docker container Environment
 
 ```
 exit
