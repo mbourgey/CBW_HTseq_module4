@@ -207,22 +207,22 @@ diff <(grep -v "^#" variants/NA12878.hc.vcf | cut -f1-2 | sort) \
 ```
 
 > 103a104   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17744709   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17744709   
 > 211a213   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17811139   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17811139   
 > 244a247   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17830757   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17830757   
 > 265,266c268,270   
 > < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845333   
 > < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845337   
-> ---   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845298   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845318   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845334   
+> \-\-\-   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845298   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845318   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845334   
 > 274a279   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17850941   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17850941   
 > 303a309   
-> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17875141   
+> \> 1  &nbsp;&nbsp;&nbsp;&nbsp; 17875141   
 > 308d313   
 > < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17879077   
 
