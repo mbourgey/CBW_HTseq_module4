@@ -14,7 +14,7 @@ home: https://bioinformaticsdotca.github.io/htseq_2020
 
 -----------------------
 
-# CBW HT-seq Module 4 - Single Nucleotide Variant Calling   
+# CBW HTG Module 4 - Single Nucleotide Variant Calling   
 
  
 Created by Mathieu Bourgey, _Ph.D
@@ -53,7 +53,7 @@ We're going to focus on the reads extracted from a 300 kbp stretch of chromosome
 
 | Chromosome | Start | End |
 | --- | --- | --- |
-| chr1 | 17704860 | 18004860 |
+| 1 | 17704860 | 18004860 |
 
 
 
@@ -75,13 +75,20 @@ In this session, we will particularly focus on GATK HaplotypeCaller SNV detectio
 
 
 ```
-export WORK_DIR_M4=$HOME/workspace/HTseq/Module4/
-export REF=$HOME/workspace/HTseq/Module4/reference
-mkdir -p $WORK_DIR_M4
-cd $WORK_DIR_M4
-ln -s $HOME/CourseData/HT_data/Module4/* .
+mkdir -p $HOME/workspace/HTG/Module4/
 
-salloc --mem 0 -n 8
+docker run --privileged -v /tmp:/tmp --network host -it -w $PWD -v $HOME:$HOME \
+--user $UID:$GROUPS -v /etc/group:/etc/group  -v /etc/passwd:/etc/passwd \
+-v /etc/fonts/:/etc/fonts/ -v /media:/media c3genomics/genpipes:0.8
+
+export WORK_DIR_M4=$HOME/workspace/HTG/Module4/
+export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
+mkdir -p ${WORK_DIR_M4}/bam/NA12878
+cd $WORK_DIR_M4
+
+cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.dup.recalba* bam/NA12878
+cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.dup.recal.ba* bam/NA12878
+
 
 module load mugqic/java/openjdk-jdk1.8.0_72 mugqic/GenomeAnalysisTK/4.1.0.0 mugqic/snpEff/4.3
 ```
@@ -97,9 +104,6 @@ The initial structure of your folders should look like this:
 ROOT
 |-- bam/               # bam file from the previous Module(down sampled)
     `-- NA12878/             # Child sample directory
-    `-- NA12891/             # Father sample directory
-    `-- NA12892/             # Mother sample directory
-`-- reference/               # hg19 reference and indexes
 `-- scripts/                 # command lines scripts
 `-- saved_results/           # precomputed final files
 ```
@@ -122,7 +126,7 @@ ls bam/NA12878/
 ```
 
 
-Our starting data set consists of 100 bp paired-end Illumina reads from the child (NA12878) that have been aligned to hg19 during one of the previous modules (NA12878.bwa.sort.bam). We also have the same data after duplicate removal, indel realignment and base recalibration (NA12878.bwa.sort.rmdup.realign.bam).
+Our starting data set consists of 100 bp paired-end Illumina reads from the child (NA12878) that have been aligned to GRCh37 during one of the previous modules (NA12878.sorted.bam). We also have the same data after duplicate removal, indel realignment and base recalibration (NA12878.sorted.dup.recal.bam).
 
 
 **Do you know what are the `.bai` files?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_data1.md)
@@ -131,7 +135,7 @@ Our starting data set consists of 100 bp paired-end Illumina reads from the chil
 ## Calling variants with GATK
 <a name="variants"></a>
 
-If you recall from the previous module, we first mapped the reads to hg19 and then we removed duplicate reads and realigned the reads around the indels.
+If you recall from the previous module, we first mapped the reads to GRCh37 and then we removed duplicate reads and realigned the reads around the indels.
 
 Let's call SNPs in NA12878 using both the original and the improved bam files:
 
@@ -140,17 +144,17 @@ Let's call SNPs in NA12878 using both the original and the improved bam files:
 mkdir -p variants
 #NA12878.sort
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
--R $REF/hg19.fa \
--I bam/NA12878/NA12878.bwa.sort.bam \
+-R $REF/genome/Homo_sapiens.GRCh37.fa \
+-I bam/NA12878/NA12878.sorted.bam \
 -O variants/NA12878.hc.vcf \
--L chr1:17704860-18004860
+-L 1:17704860-18004860
 
 #NA12878.sort.rmdup.realign
 java -Xmx2g -jar $GATK_JAR HaplotypeCaller \
--R $REF/hg19.fa \
--I bam/NA12878/NA12878.bwa.sort.rmdup.realign.bam \
+-R $REF/genome/Homo_sapiens.GRCh37.fa \
+-I bam/NA12878/NA12878.sorted.dup.recal.bam \
 -O variants/NA12878.rmdup.realign.hc.vcf \
--L chr1:17704860-18004860
+-L 1:17704860-18004860
 ```
 
 `-Xmx2g` instructs java to allow up 2 GB of RAM to be used for GATK.
@@ -242,7 +246,7 @@ where `XX` is the id of your account. You may enter your password. Once the copy
 
 -----
 
-Finally, go to a region on chromsome 1 with reads (chr1:17704860-18004860) and spend some time SNP gazing...
+Finally, go to a region on chromsome 1 with reads (1:17704860-18004860) and spend some time SNP gazing...
 
 **Do the SNPs look believable?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_igv1.md)
 
@@ -281,7 +285,7 @@ To perform more rigorous filtering, another program must be used. In our case, w
 
 ```
 java -Xmx2g -jar $GATK_JAR VariantFiltration \
--R reference/hg19.fa \
+-R $REF/genome/Homo_sapiens.GRCh37.fa \
 -V variants/NA12878.rmdup.realign.hc.vcf \
 -O variants/NA12878.rmdup.realign.hc.filter.vcf \
 -filter "QD < 2.0" \
