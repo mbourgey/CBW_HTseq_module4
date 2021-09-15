@@ -86,7 +86,7 @@ export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
 mkdir -p ${WORK_DIR_M4}/bam/NA12878
 cd $WORK_DIR_M4
 
-cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.dup.recal.ba* bam/NA12878
+cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.ba* bam/NA12878
 cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.dup.recal.ba* bam/NA12878
 
 
@@ -202,12 +202,30 @@ The ref vs alt alleles, variant quality (QUAL column) and the per-sample genotyp
 Use the following command to pull out differences between the two files: 
 
 ```
-diff <(grep ^chr variants/NA12878.hc.vcf | cut -f1-2 | sort) \
-<(grep ^chr variants/NA12878.rmdup.realign.hc.vcf | cut -f1-2 | sort)
+diff <(grep -v "^#" variants/NA12878.hc.vcf | cut -f1-2 | sort) \
+<(grep -v "^#" variants/NA12878.rmdup.realign.hc.vcf | cut -f1-2 | sort)
 ```
 
-> 378d377   
-> < chr1  &nbsp;&nbsp;&nbsp;&nbsp; 17927571   
+> 103a104   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17744709   
+> 211a213   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17811139   
+> 244a247   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17830757   
+> 265,266c268,270   
+> < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845333   
+> < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845337   
+> ---   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845298   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845318   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17845334   
+> 274a279   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17850941   
+> 303a309   
+> > 1  &nbsp;&nbsp;&nbsp;&nbsp; 17875141   
+> 308d313   
+> < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17879077   
+
 
 
 
