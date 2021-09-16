@@ -1,6 +1,3 @@
-This variant has 2 effect categories:
 
- * frameshift_variant
- * splice_region_variant
+The 2 variants are missense variants which means a non-disruptive variant that might change protein effectiveness. 
 
-This is the frameshift_variant effect which lead to the classification of HIGH impact.

@@ -401,6 +401,8 @@ One nice feature in snpEff is that it tries to assess the impact of each variant
 
 **How many variants had a high impact?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_snpEff2.md)
 
+**How many variants had a moderate impact?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_snpEff5.md)
+
 
 **What effect categories were represented in these variants?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_snpEff3.md)
 
