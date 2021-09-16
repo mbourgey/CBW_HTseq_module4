@@ -236,11 +236,11 @@ The best way to see and understand the differences between the two vcf files wil
 If you need, the IGV color codes can be found here: [IGV color code by insert size](http://software.broadinstitute.org/software/igv/interpreting_insert_size) and [IGV color code by pair orientation](http://software.broadinstitute.org/software/igv/interpreting_pair_orientations).
 
 ----
-**Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file from the precomputated ftp server `https://datahub-39-cm2.p.genap.ca/HTseq/`.
+**Option 1:** You can view your files (bam and vcf files) in the IGV browser by using the URL for that file.
 
 In a browser, like Firefox, type in the server name and all files will be shown there. Find your bam and your vcf files, right click it and 'copy the link location'.
 
-Next, open IGV and select hg19 as the reference genome as you did in the visualization module.
+Next, open IGV and select b37 as the reference genome as you did in the visualization module.
 
 In IGV, load both the original and the realigned bam files (NA12878.bwa.sort.bam and NA12878.bwa.sort.rmdup.realign.bam) using (File->Load from URL...).
 
@@ -250,17 +250,18 @@ After you have loaded the two bam files, load the two vcf files (NA12878.hc.vcf 
 **Option 2:** Alternatively, you can download all the NA12878.* files in the current directory to your local computer:
 
 
-To do this you can use the procedure that was described previously. Open another terminal and launch the following command to copy your data into your local computer  
+To do this you can use the procedure that was described previously. Open another terminal and use the `scp` command to copy your data into your local computer  
 
 ```
 scp -r userXX@CBW.calculquebec.cloud:workspace/HTseq/Module4/bam . 
 scp -r userXX@CBW.calculquebec.cloud:workspace/HTseq/Module4/variants  .
 ```
 
-where `XX` is the id of your account. You may enter your password. Once the copy is done, open IGV and load the file from folders bam and variants.
+Next, open IGV and select b37 as the reference genome as you did in the visualization module.
 
+In IGV, load both the original and the realigned bam files (NA12878.bwa.sort.bam and NA12878.bwa.sort.rmdup.realign.bam) using (File->Load from file...).
 
-
+After you have loaded the two bam files, load the two vcf files (NA12878.hc.vcf and NA12878.rmdup.realign.hc.vcf) in the same way.
 
 -----
 
