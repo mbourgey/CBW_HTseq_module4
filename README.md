@@ -342,15 +342,13 @@ We typically use SnpEff but many use Annovar and VEP as well.
 
 Let's run snpEff
 ```
-java -Xmx2G -jar $SNPEFF_HOME/snpEff.jar eff \
--c $REF/snpEff_hg19.config -v -no-intergenic \
--i vcf -o vcf hg19 variants/NA12878.rmdup.realign.hc.filter.vcf >  variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf
+java -Xmx4G -jar $SNPEFF_HOME/snpEff.jar eff \
+-v -no-intergenic \
+-i vcf -o vcf GRCh37.75 variants/NA12878.rmdup.realign.hc.filter.vcf >  variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf
 ```
 
 
 `-Xmx2g` instructs java to allow up 4 GB of RAM to be used for snpEff. 
-
-`-c` specifies the path to the snpEff configuration file 
 
 `-v` specifies verbose output. 
 
@@ -358,7 +356,7 @@ java -Xmx2G -jar $SNPEFF_HOME/snpEff.jar eff \
 
 `-i` and `-o` specify the input and output file format respectively. In this case, we specify vcf for both. 
 
-`hg19` specifies that we want to use the hg19 annotation database. 
+`GRCh37.75` specifies that we want to use the GRCh37.75 annotation database. 
 
 `variants/NA12878.rmdup.realign.hc.filter.vcf` specifies our input vcf filename 
 
@@ -439,11 +437,11 @@ module unload  mugqic/GenomeAnalysisTK/4.1.0.0
 module load mugqic/GenomeAnalysisTK/3.8
 
 java -Xmx2g -jar $GATK_JAR -T VariantAnnotator \
--R $REF/hg19.fa \
---dbsnp $REF/dbSNP_135_chr1.vcf.gz \
+-R $REF/genome/Homo_sapiens.GRCh37.fa \
+--dbsnp $REF/annotations/Homo_sapiens.GRCh37.dbSNP150.vcf.gz \
 -V variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf \
 -o variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf \
--L chr1:17704860-18004860
+-L 1:17704860-18004860
 
 #return to GATK 4
 module unload mugqic/GenomeAnalysisTK/3.8
@@ -482,7 +480,7 @@ As additional practice, perform the same steps for the other two individuals (he
 
  3. **Do all three family members have the same genotype for Rs7538876 and Rs2254135?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_trio3.md)
 
- 4. GATK produces even better variant calling results if all three BAM files are specified at the same time (i.e. specifying multiple `-I filename` options). Try this and then perform the rest of module 5 on the trio vcf file. **Does this seem to improve your variant calling results? Does it seem to reduce the trio conflict rate?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_trio4.md)
+ 4. GATK produces even better variant calling results if all three BAM files are specified at the same time (i.e. specifying multiple `-I filename` options). Try this and then perform the rest of module 4 on the trio vcf file. **Does this seem to improve your variant calling results? Does it seem to reduce the trio conflict rate?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_trio4.md)
  
  
 
