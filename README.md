@@ -227,7 +227,7 @@ diff <(grep -v "^#" variants/NA12878.hc.vcf | cut -f1-2 | sort) \
 > < 1  &nbsp;&nbsp;&nbsp;&nbsp; 17879077   
 
 
-
+**Is this result concordant to our previous comparison of files before and after duplicate removal and realignment?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_vcf5.md)
 
 ### Use IGV to investigate the SNPs
 
@@ -251,11 +251,6 @@ After you have loaded the two bam files, load the two vcf files (NA12878.hc.vcf 
 
 
 To do this you can use the procedure that was described previously. Open another terminal and use the `scp` command to copy your data into your local computer  
-
-```
-scp -r userXX@CBW.calculquebec.cloud:workspace/HTseq/Module4/bam . 
-scp -r userXX@CBW.calculquebec.cloud:workspace/HTseq/Module4/variants  .
-```
 
 Next, open IGV and select b37 as the reference genome as you did in the visualization module.
 
