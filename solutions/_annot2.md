@@ -6,7 +6,7 @@ awk ' BEGIN {FS="\t" ; p=0; d=0 ; OFS="\t"} \
 END {print "PASS:", p , "dbSNP:" , d , "%:", d/p} ' variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf
 ```
 
-> PASS: &nbsp;&nbsp;&nbsp;&nbsp; 403 &nbsp;&nbsp;&nbsp;&nbsp; dbSNP: &nbsp;&nbsp;&nbsp;&nbsp; 380 &nbsp;&nbsp;&nbsp;&nbsp; %: &nbsp;&nbsp;&nbsp;&nbsp; 0.942928   
+> PASS: &nbsp;&nbsp;&nbsp;&nbsp; 404 &nbsp;&nbsp;&nbsp;&nbsp; dbSNP: &nbsp;&nbsp;&nbsp;&nbsp; 397 &nbsp;&nbsp;&nbsp;&nbsp; %: &nbsp;&nbsp;&nbsp;&nbsp; 0.982673   
 
 For those unfamiliar with `awk commands`, they can use these commands and then compute manually the percentage.
 
@@ -15,5 +15,5 @@ For those unfamiliar with `awk commands`, they can use these commands and then c
 grep -v ^# variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf | grep PASS | grep -c rs
 grep -v ^# variants/NA12878.rmdup.realign.hc.filter.snpeff.dbsnp.vcf | grep -c PASS
 ```
-> 379   
-> 403   
+> 397   
+> 404   
