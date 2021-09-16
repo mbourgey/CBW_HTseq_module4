@@ -484,7 +484,7 @@ As additional practice, perform the same steps for the other two individuals (he
  
  
 
-### quit the working node Environment
+### quit the container Environment
 
 ```
 exit
