@@ -411,7 +411,6 @@ One nice feature in snpEff is that it tries to assess the impact of each variant
 
 
 
-**How many variants had a moderate impact? What effect categories were represented in these variants?** [solution](https://github.com/mbourgey/CBW_HTseq_module4/blob/master/solutions/_snpEff5.md)
 
 ## Adding dbSNP annotations
 <a name="dbSNP"></a>
