@@ -5,4 +5,4 @@ grep HIGH variants/NA12878.rmdup.realign.hc.filter.snpeff.vcf
 ```
 
 
-Only one variant is found 
+No high impact variant is found 
