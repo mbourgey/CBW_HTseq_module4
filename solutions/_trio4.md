@@ -1,1 +1,1 @@
-Most of the variant have keep the same genotpes but it improve call in supicious site such as chr1:17,841,784-17,841,823. In a general manner the more information is provided, the more accurate the genotype call are.   
+Most of the variant have keep the same genotpes but it improve call in supicious site such as 1:17,841,784-17,841,823. In a general manner the more information is provided, the more accurate the genotype call are.   
