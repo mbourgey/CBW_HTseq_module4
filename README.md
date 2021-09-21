@@ -86,6 +86,7 @@ export REF=$MUGQIC_INSTALL_HOME/genomes/species/Homo_sapiens.GRCh37/
 mkdir -p ${WORK_DIR_M4}/bam/NA12878
 cd $WORK_DIR_M4
 
+ln -s ~/CourseData/HTG_data/Module4/* .
 cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.ba* bam/NA12878
 cp $HOME/workspace/HTG/Module3/alignment/NA12878/NA12878.sorted.dup.recal.ba* bam/NA12878
 
