@@ -1,11 +1,11 @@
 ---
 layout: tutorial_page
-permalink: /htseq_2020_module4_lab
+permalink: /htg_2021_module4_lab
 title: HTSeq Lab 4
 header1: Workshop Pages for Students
-header2: Informatics on High-Throughput Sequencing Data Module 4 Lab
+header2: High Throughput Genomics Analysis Module 4 Lab
 image: /site_images/CBW_High-throughput_icon.jpg
-home: https://bioinformaticsdotca.github.io/htseq_2020
+home: https://bioinformaticsdotca.github.io/HTG_2021
 ---
 
 -----------------------
