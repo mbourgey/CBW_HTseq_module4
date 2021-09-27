@@ -1,6 +1,6 @@
 ---
 layout: tutorial_page
-permalink: /htg_2021_module4_lab
+permalink: /htg_2021_module4_lab_mb
 title: HTSeq Lab 4
 header1: Workshop Pages for Students
 header2: High Throughput Genomics Analysis Module 4 Lab
